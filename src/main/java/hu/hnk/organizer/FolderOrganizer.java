@@ -2,8 +2,12 @@ package hu.hnk.organizer;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Collection;
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
+@Service
 public interface FolderOrganizer {
 	public static final String LOGFILE_EXTENSION = ".orlog";
 
@@ -18,5 +22,7 @@ public interface FolderOrganizer {
 	public List<String> getFileTypes(File[] files);
 
 	public void moveFilesToFolders(File[] files) throws IOException;
+
+	public void addItemsToBlackList(Collection<String> items);
 
 }

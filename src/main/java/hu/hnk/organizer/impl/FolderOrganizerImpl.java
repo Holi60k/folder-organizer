@@ -10,15 +10,17 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatterBuilder;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.Validate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 import hu.hnk.organizer.FolderOrganizer;
-
+@Component
 public class FolderOrganizerImpl implements FolderOrganizer {
 
 	public static final Logger logger = LoggerFactory.getLogger(FolderOrganizerImpl.class);
@@ -34,11 +36,6 @@ public class FolderOrganizerImpl implements FolderOrganizer {
 		organizerLogFile = new File(getNewLogName());
 		outputStream = new FileOutputStream(organizerLogFile);
 		streamWriter = new OutputStreamWriter(outputStream);
-	}
-
-	public FolderOrganizerImpl(List<String> blackList) throws FileNotFoundException {
-		new FolderOrganizerImpl();
-		this.blackList.addAll(blackList);
 	}
 
 	private String getNewLogName() {
@@ -121,6 +118,11 @@ public class FolderOrganizerImpl implements FolderOrganizer {
 
 	public void setOrganizerLogFile(File organizerLogFile) {
 		this.organizerLogFile = organizerLogFile;
+	}
+
+	@Override
+	public void addItemsToBlackList(Collection<String> items) {
+		blackList.addAll(items);
 	}
 
 }
